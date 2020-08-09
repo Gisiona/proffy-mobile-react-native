@@ -1,21 +1,51 @@
-import React from 'react';
-import { View, } from 'react-native';
+import React, { useState } from 'react';
+import { View,Text } from 'react-native';
 import styles from './styles';
-import { useNavigation} from '@react-navigation/native';
 import PageHeader from '../../components/PageHeader';
 import TeacherItem from '../../components/TeacherItem';
-import { ScrollView } from 'react-native-gesture-handler';
+import { ScrollView, TextInput, RectButton, BorderlessButton } from 'react-native-gesture-handler';
+import {Feather } from '@expo/vector-icons';
 
 function TeacherList() {
-    const navigation = useNavigation();
+    const [isFilterVisible, setIsFilterVisible] = useState(false);
 
-    function handleNavigationToBackPage() {
-        navigation.goBack();
+    function handleToggleFilterVisible() {
+        setIsFilterVisible(!isFilterVisible);
     }
 
     return (
         <View style={styles.container}>            
-            <PageHeader title="Proffys disponíveis" />
+            <PageHeader title="Proffys disponíveis"
+                headerRight={(
+                    <BorderlessButton onPress={handleToggleFilterVisible}>
+                        <Feather name="filter" size={20} color="#fff" />
+                    </BorderlessButton>
+                )}
+            >
+                {isFilterVisible && (
+                    <View style={styles.searchForm}>
+                        <Text style={styles.titleSearch}>Matéria</Text>
+                        <TextInput style={styles.inputSearch} placeholder="Qual a matéria?" placeholderTextColor="#c1bccc"/>
+
+                        <View style={styles.inputSearchGroup}>
+                            <View style={styles.inputSearchBlock}>
+                                <Text style={styles.titleSearch}>Dia da semana</Text>
+                                <TextInput style={styles.inputSearch} placeholder="Qual o dia?" placeholderTextColor="#c1bccc"/>
+                            </View>
+
+                            <View style={styles.inputSearchBlock}>
+                                <Text style={styles.titleSearch}>Horário</Text>
+                                <TextInput style={styles.inputSearch} placeholder="Qual a hora?" placeholderTextColor="#c1bccc" />
+                            </View>
+                        </View>
+
+                        <RectButton style={styles.buttonFilter}>
+                            <Text style={styles.textFilter}>Filtrar</Text>
+                        </RectButton>
+                    </View>
+                )}
+            </PageHeader>
+
             <ScrollView style={styles.teacherList}
             contentContainerStyle={{
                 paddingHorizontal: 16,
