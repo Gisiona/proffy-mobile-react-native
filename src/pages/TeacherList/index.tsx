@@ -49,8 +49,10 @@ function TeacherList() {
             <ScrollView style={styles.teacherList}
             contentContainerStyle={{
                 paddingHorizontal: 16,
-                paddingBottom: 16
-            }}>
+                paddingBottom: 16,
+            }}
+            showsVerticalScrollIndicator={false}
+            >
                 <TeacherItem title=""/>
                 <TeacherItem title=""/>
                 <TeacherItem title=""/>

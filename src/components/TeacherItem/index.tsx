@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Image, Text } from 'react-native';
+import { View, Image, Text, Linking } from 'react-native';
 import styles from './styles';
 import iconHeartOutline from '../../../src/assets/images/icons/heart-outline.png';
 import iconUnfavorite from '../../../src/assets/images/icons/unfavorite.png';
@@ -11,6 +11,10 @@ interface PageHeaderProps {
 }
 
 const PageHeader: React.FC<PageHeaderProps> = ({title}) => {
+
+    function sendWhatsapp(){
+        Linking.openURL(`whatsapp://send?phone=${"5511979510575" }&text=${"Olá Proffy, tudo bem?"}`);
+    }
    
     return (
         <View style={styles.container}>
@@ -37,7 +41,7 @@ const PageHeader: React.FC<PageHeaderProps> = ({title}) => {
                         <Image source={iconHeartOutline} />
                     </RectButton>
 
-                    <RectButton style={styles.contactButton}>
+                    <RectButton style={styles.contactButton} onPress={sendWhatsapp}>
                         <Image source={iconWhatsapp} />
                         <Text style={styles.contactText}>Entrar em contato</Text>
                     </RectButton>
